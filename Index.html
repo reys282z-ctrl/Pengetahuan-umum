@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengetahuan Umum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .fact-list {
+            list-style: none;
+        }
+
+        .fact-list li {
+            padding: 15px;
+            background: linear-gradient(to right, #f093fb 0%, #f5576c 100%);
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .fact-list li:hover {
+            transform: scale(1.02);
+        }
+
+        .quiz-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .option {
+            padding: 12px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: #f0f0f0;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            color: #667eea;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 Pengetahuan Umum</h1>
+        <p class="subtitle">Perluas wawasanmu dengan fakta-fakta menarik dari seluruh dunia!</p>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('sains')">🔬 Sains</button>
+            <button class="tab-btn" onclick="showTab('sejarah')">📜 Sejarah</button>
+            <button class="tab-btn" onclick="showTab('geografi')">🗺️ Geografi</button>
+            <button class="tab-btn" onclick="showTab('fakta')">💡 Fakta Unik</button>
+            <button class="tab-btn" onclick="showTab('kuis')">🎯 Kuis</button>
+        </div>
+
+        <div class="content-area">
+            <div id="sains" class="tab-content active">
+                <div class="card">
+                    <h3>🌟 Kecepatan Cahaya</h3>
+                    <p>Cahaya bergerak dengan kecepatan sekitar 299.792 kilometer per detik di ruang hampa. Ini berarti cahaya dapat mengelilingi Bumi sekitar 7,5 kali dalam satu detik!</p>
+                </div>
+                <div class="card">
+                    <h3>💧 Air di Bumi</h3>
+                    <p>Sekitar 71% permukaan Bumi tertutup air, namun hanya 3% yang merupakan air tawar, dan sebagian besar air tawar tersebut terkunci dalam es di kutub dan gletser.</p>
+                </div>
+                <div class="card">
+                    <h3>🧬 DNA Manusia</h3>
+                    <p>Jika DNA dalam satu sel manusia direntangkan, panjangnya akan mencapai sekitar 2 meter. Dengan triliunan sel dalam tubuh, total panjang DNA bisa mencapai jarak Bumi ke Matahari pulang-pergi!</p>
+                </div>
+            </div>
+
+            <div id="sejarah" class="tab-content">
+                <div class="card">
+                    <h3>🏛️ Piramida Giza</h3>
+                    <p>Piramida Agung Giza adalah satu-satunya dari Tujuh Keajaiban Dunia Kuno yang masih berdiri hingga sekarang. Dibangun sekitar 4.500 tahun yang lalu dengan lebih dari 2 juta blok batu.</p>
+                </div>
+                <div class="card">
+                    <h3>📖 Tembok Besar China</h3>
+                    <p>Tembok Besar China memiliki panjang total lebih dari 21.000 kilometer jika semua cabangnya dihitung. Pembangunannya memakan waktu lebih dari 2.000 tahun dengan melibatkan jutaan pekerja.</p>
+                </div>
+                <div class="card">
+                    <h3>🌏 Kerajaan Majapahit</h3>
+                    <p>Kerajaan Majapahit adalah salah satu kerajaan terbesar di Nusantara yang berdiri pada tahun 1293-1527. Wilayahnya membentang dari Sumatera hingga Papua.</p>
+                </div>
+            </div>
+
+            <div id="geografi" class="tab-content">
+                <div class="card">
+                    <h3>🏔️ Gunung Tertinggi</h3>
+                    <p>Gunung Everest adalah gunung tertinggi di dunia dengan ketinggian 8.848,86 meter di atas permukaan laut. Terletak di perbatasan Nepal dan Tibet.</p>
+                </div>
+                <div class="card">
+                    <h3>🌊 Samudra Terdalam</h3>
+                    <p>Palung Mariana di Samudra Pasifik adalah tempat terdalam di Bumi dengan kedalaman sekitar 11.034 meter. Tekanan di dasarnya setara dengan 50 pesawat jumbo jet yang menimpa tubuh Anda!</p>
+                </div>
+                <div class="card">
+                    <h3>🏝️ Negara Kepulauan</h3>
+                    <p>Indonesia adalah negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau. Membentang lebih dari 5.000 kilometer dari Sabang sampai Merauke.</p>
+                </div>
+            </div>
+
+            <div id="fakta" class="tab-content">
+                <ul class="fact-list">
+                    <li>🐝 Lebah madu harus mengunjungi 2 juta bunga untuk membuat 500 gram madu</li>
+                    <li>🧠 Otak manusia menggunakan 20% dari total energi tubuh meskipun hanya 2% dari berat badan</li>
+                    <li>⚡ Petir 5 kali lebih panas dari permukaan matahari dengan suhu 30.000°C</li>
+                    <li>🦋 Kupu-kupu dapat merasakan rasa dengan kaki mereka</li>
+                    <li>🌙 Jejak kaki astronot di bulan bisa bertahan jutaan tahun karena tidak ada angin</li>
+                    <li>🐙 Gurita memiliki tiga jantung dan darah berwarna biru</li>
+                    <li>🌳 Pohon tertua di dunia berusia lebih dari 5.000 tahun</li>
+                    <li>💎 Berlian terbentuk di kedalaman 150-200 km di bawah permukaan bumi</li>
+                </ul>
+            </div>
+
+            <div id="kuis" class="tab-content">
+                <h2 style="color: #667eea; margin-bottom: 20px;">🎯 Uji Pengetahuanmu!</h2>
+                <div id="quiz-container"></div>
+                <div class="score" id="score"></div>
+                <button class="quiz-btn" onclick="resetQuiz()">🔄 Mulai Ulang Kuis</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "Berapa planet dalam tata surya kita?",
+                options: ["7", "8", "9", "10"],
+                correct: 1
+            },
+            {
+                q: "Siapa penemu lampu pijar?",
+                options: ["Albert Einstein", "Thomas Edison", "Nikola Tesla", "Alexander Graham Bell"],
+                correct: 1
+            },
+            {
+                q: "Apa ibukota Indonesia?",
+                options: ["Bandung", "Surabaya", "Jakarta", "Yogyakarta"],
+                correct: 2
+            },
+            {
+                q: "Berapa benua di dunia?",
+                options: ["5", "6", "7", "8"],
+                correct: 2
+            },
+            {
+                q: "Gas apa yang paling banyak di atmosfer Bumi?",
+                options: ["Oksigen", "Nitrogen", "Karbon Dioksida", "Hidrogen"],
+                correct: 1
+            }
+        ];
+
+        let score = 0;
+        let answered = 0;
+
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'kuis' && answered === 0) {
+                loadQuiz();
+            }
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            questions.forEach((item, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <h3>Pertanyaan ${index + 1}</h3>
+                    <p>${item.q}</p>
+                    <div class="options">
+                        ${item.options.map((opt, i) => 
+                            `<div class="option" onclick="checkAnswer(${index}, ${i}, this)">${opt}</div>`
+                        ).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function checkAnswer(questionIndex, selectedIndex, element) {
+            if (element.classList.contains('correct') || element.classList.contains('wrong')) {
+                return;
+            }
+
+            const options = element.parentElement.children;
+            const correctIndex = questions[questionIndex].correct;
+
+            if (selectedIndex === correctIndex) {
+                element.classList.add('correct');
+                score++;
+            } else {
+                element.classList.add('wrong');
+                options[correctIndex].classList.add('correct');
+            }
+
+            Array.from(options).forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            answered++;
+            updateScore();
+        }
+
+        function updateScore() {
+            const scoreEl = document.getElementById('score');
+            scoreEl.textContent = `Skor: ${score} dari ${answered}`;
+            
+            if (answered === questions.length) {
+                const percentage = (score / questions.length) * 100;
+                let message = '';
+                if (percentage >= 80) message = '🎉 Luar biasa!';
+                else if (percentage >= 60) message = '👍 Bagus!';
+                else message = '💪 Terus belajar!';
+                
+                scoreEl.textContent += ` - ${message}`;
+            }
+        }
+
+        function resetQuiz() {
+            score = 0;
+            answered = 0;
+            document.getElementById('score').textContent = '';
+            loadQuiz();
+        }
+    </script>
+</body>
+  </html>
